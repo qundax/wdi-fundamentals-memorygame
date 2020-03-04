@@ -1,9 +1,6 @@
-const cards = [{
-	rank: "queen",
-	suit: "hearts",
-	cardImage: "images/queen-of-hearts.png"
-}, cardFactory("queen", "diamonds", "images/queen-of-diamonds.png"), cardFactory("king", "hearts", "images/king-of-hearts.png"), cardFactory("king", "diamonds", "images/king-of-diamonds.png")];
-const cardsInPlay = [];
+const cards = [cardFactory("queen", "hearts", "images/queen-of-hearts.png"), cardFactory("queen", "diamonds", "images/queen-of-diamonds.png"), cardFactory("king", "hearts", "images/king-of-hearts.png"), cardFactory("king", "diamonds", "images/king-of-diamonds.png")];
+let cardsInPlay = [];
+let playerScore = 0;
 
 function cardFactory(rank, suit, cardImage) {
 	return {
@@ -12,24 +9,44 @@ function cardFactory(rank, suit, cardImage) {
 		cardImage: cardImage};
 }
 
-function checkForMatch() {
-	if (cardsInPlay[0] === cardsInPlay[1]) {
-		console.log("You found a match!");
-	} else {
-		console.log("Sorry, try again.");
+function createBoard() {
+	cardsInPlay = [];
+	for (let i = 0; i < cards.length; i++) {
+		let cardElement = document.createElement("img");
+		cardElement.setAttribute("src", "images/back.png");
+		cardElement.setAttribute("data-id", i);
+		cardElement.addEventListener("click", flipCard);
+		document.getElementById("game-board").appendChild(cardElement);
+		console.log(cardElement);
 	}
 }
 
-function flipCard(cardId) {
+function resetBoard() {
+	document.getElementById("game-board").innerHTML = "";
+	createBoard();
+}
+
+function checkForMatch() {
+	if (cardsInPlay[0] === cardsInPlay[1]) {
+		alert("You found a match!");
+		playerScore++;
+		document.getElementById("score").innerHTML = `Score : ${playerScore}`;
+	} else {
+		alert("Sorry, try again.");
+	}
+}
+
+function flipCard() {
+	const cardId = this.getAttribute("data-id");
 	const flipped = cards[cardId];
-	console.log(`User flipped ${flipped.rank}`);
-	console.log(flipped.cardImage);
-	console.log(flipped.suit);
-	cardsInPlay.push(flipped.name);
+	cardsInPlay.push(flipped.rank);
+	this.setAttribute("src", flipped.cardImage)
 	if (cardsInPlay.length === 2) {
 		checkForMatch();
 	}
 }
 
-flipCard(0);
-flipCard(2);
+createBoard();
+
+resetButton = document.getElementById("reset");
+resetButton.addEventListener("click", resetBoard);

@@ -22,6 +22,28 @@ body {
 	margin: 0;
 }
 
+button {
+	background-color: #00A6B3;
+	font-family: "Raleway", sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	color: #FFFFFF;
+	text-transform: uppercase;
+	height: 50px;
+	width: 100px;
+	border-radius: 10px;
+	margin: 10px auto;
+}
+
+button:hover {
+	background-color: #0D2C40;
+	font-size: 16px;
+	font-weight: 700;
+	height: 60px;
+	width: 110px;
+	margin: 5px auto;
+}
+
 footer {
 	background: #0D2C40;
 	color: #FFFFFF;
@@ -101,4 +123,11 @@ font-size: 0;
 .name {
 	color: #F15B31;
 	font-weight: 700;
+}
+
+#score {
+	font-family: "Droid Serif", serif;
+	font-size: 32px;
+	color: #0D2C40;
+	margin-bottom: 20px;
 }
