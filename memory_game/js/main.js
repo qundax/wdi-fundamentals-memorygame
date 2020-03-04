@@ -1,5 +1,16 @@
-const cards = ["queen", "queen", "king", "king"];
+const cards = [{
+	rank: "queen",
+	suit: "hearts",
+	cardImage: "images/queen-of-hearts.png"
+}, cardFactory("queen", "diamonds", "images/queen-of-diamonds.png"), cardFactory("king", "hearts", "images/king-of-hearts.png"), cardFactory("king", "diamonds", "images/king-of-diamonds.png")];
 const cardsInPlay = [];
+
+function cardFactory(rank, suit, cardImage) {
+	return {
+		rank: rank,
+		suit: suit,
+		cardImage: cardImage};
+}
 
 function checkForMatch() {
 	if (cardsInPlay[0] === cardsInPlay[1]) {
@@ -10,9 +21,11 @@ function checkForMatch() {
 }
 
 function flipCard(cardId) {
-	let flipped = cards[cardId];
-	console.log(`User flipped ${flipped}`);
-	cardsInPlay.push(flipped);
+	const flipped = cards[cardId];
+	console.log(`User flipped ${flipped.rank}`);
+	console.log(flipped.cardImage);
+	console.log(flipped.suit);
+	cardsInPlay.push(flipped.name);
 	if (cardsInPlay.length === 2) {
 		checkForMatch();
 	}
